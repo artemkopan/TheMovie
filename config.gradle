@@ -1,0 +1,59 @@
+gradle.properties
+import java.text.SimpleDateFormat
+
+ext {
+    APP_NAME = "TheMovie"
+    APPLICATION_ID = "com.artemkopan.movie"
+
+    BASE_URL = "http://fittest.in-staging.pub"
+    ENDPOINT = BASE_URL + "/api/v1/"
+}
+
+ext {
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 0
+    versionBuild = 0
+
+    computeVersionCode = this.&computeVersionCode
+    computeVersionName = this.&computeVersionName
+
+    generateName = this.&generateName
+}
+
+
+def computeVersionCode() {
+    return versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
+}
+
+def computeVersionName() {
+
+    return "${versionMajor}.${versionMinor}.${versionPatch}"
+}
+
+def generateName(appVariants) {
+    appVariants.all { variant ->
+        variant.outputs.each { output ->
+            def apkName = APP_NAME;
+
+            if (variant.buildType.name == "release") {
+                apkName += "_v.${variant.versionName}_" + getDate();
+            } else {
+                apkName += "_debug";
+            }
+
+            def flavors = variant.productFlavors[0]
+            def flavorName = flavors == null || flavors.name == null ? "" : "-" + flavors.name
+
+            apkName += flavorName + ".apk"
+
+            output.outputFile = new File(output.outputFile.parent, apkName)
+        }
+    }
+}
+
+def getDate() {
+    def df = new SimpleDateFormat("yyyy-MM-dd") //you can change it
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    return df.format(new Date())
+}

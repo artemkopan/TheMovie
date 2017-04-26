@@ -1,0 +1,100 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext.versions = [
+        minSdk            : 21,
+        targetSdk         : 25,
+        compileSdk        : 25,
+        buildTools        : '25.0.2',
+
+        // Gradle plugins
+        android           : '2.3.1',
+        androidApt        : '1.8',
+        androidDevMetrics : '0.4',
+        kotlinGradlePlugin: '1.1.2',
+
+        kotlin            : '1.1.1',
+        supportLibrary    : '25.3.1',
+        baseProject       : '2.0.3',
+        constraintLayout  : '1.0.2',
+        dagger            : '2.9',
+
+        // Network
+        retrofit          : '2.2.0',
+        okLog             : '2.1.0',
+        okHttpLogging     : '3.4.1',
+
+        // Rx
+        rxJava            : '2.0.8',
+        rxAndroid         : '2.0.1',
+        rxPermissions     : '0.9.3@aar',
+
+        // Image
+        glide             : '3.7.0',
+
+        // Other
+        facebookSdk       : '4.20.0',
+        asdp              : '1.1',
+        swipeLayout       : '1.2.0@aar',
+        textdrawable      : '1.0.1',
+        exoplayer         : 'r2.3.1',
+
+        // Debug
+        timber            : '4.5.1',
+        leakCanary        : '1.5',
+
+        // Blur
+        blurry            : '2.1.1'
+]
+
+ext.gradlePlugins = [
+        android          : "com.android.tools.build:gradle:$versions.android",
+        androidApt       : "com.neenbedankt.gradle.plugins:android-apt:$versions.androidApt",
+        androidDevMetrics: "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androidDevMetrics",
+        kotlin           : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinGradlePlugin"
+]
+
+ext.libraries = [
+        kotlin            : "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin",
+
+        supportAppCompat  : "com.android.support:appcompat-v7:$versions.supportLibrary",
+        supportDesign     : "com.android.support:design:$versions.supportLibrary",
+        supportAnnotations: "com.android.support:support-annotations:$versions.supportLibrary",
+        constraintLayout  : "com.android.support.constraint:constraint-layout:$versions.constraintLayout",
+        recyclerView      : "com.android.support:recyclerview-v7:$versions.supportLibrary",
+
+        baseUtils         : "com.github.artemkopan:base-utils:$versions.baseProject",
+        baseRecycler      : "com.github.artemkopan:base-recycler:$versions.baseProject",
+        baseWidget        : "com.github.artemkopan:base-widget:$versions.baseProject",
+        baseAll        : "com.github.artemkopan:base-all:$versions.baseProject",
+
+        dagger            : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler    : "com.google.dagger:dagger-compiler:$versions.dagger",
+
+        retrofit          : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        converterGson     : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        rxJavaAdapter     : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
+        okHttpLogging     : "com.squareup.okhttp3:logging-interceptor:$versions.okHttpLogging",
+
+        timber            : "com.jakewharton.timber:timber:$versions.timber",
+        okLog             : "com.github.simonpercic:oklog3:$versions.okLog",
+
+        leakCanaryDebug   : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
+        leakCanaryRelease : "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary",
+
+        rxJava            : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+        rxAndroid         : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+        rxPermissions     : "com.tbruyelle.rxpermissions:rxpermissions:$versions.rxPermissions",
+
+        glide             : "com.github.bumptech.glide:glide:$versions.glide",
+        facebookSdk       : "com.facebook.android:facebook-android-sdk:$versions.facebookSdk",
+        swipeLayout       : "com.daimajia.swipelayout:library:$versions.swipeLayout",
+        textdrawable      : "com.amulyakhare:com.amulyakhare.textdrawable:$versions.textdrawable",
+        exoplayer         : "com.google.android.exoplayer:exoplayer:$versions.exoplayer",
+
+        blurry            : "jp.wasabeef:blurry:$versions.blurry",
+        asdp              : "com.github.adhishlal:asdp:$versions.asdp"
+]
