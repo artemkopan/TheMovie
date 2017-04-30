@@ -43,7 +43,7 @@ abstract class BaseInjectActivity<P : BasePresenter<V>, V : BaseView> : BaseActi
                 .addTo(onDestroyDisposable)
     }
 
-    fun injectPresenter(presenter: P) {
+    open fun injectPresenter(presenter: P) {
         super.injectPresenter(presenter, true)
     }
 

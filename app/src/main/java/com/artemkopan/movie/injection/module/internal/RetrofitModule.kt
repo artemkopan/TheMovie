@@ -1,6 +1,7 @@
 package com.artemkopan.movie.injection.module.internal
 
 import com.artemkopan.movie.BuildConfig
+import com.artemkopan.movie.data.model.movie.MovieService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -27,5 +28,11 @@ class RetrofitModule {
                 .build()
     }
 
+
+    @Provides
+    @Singleton
+    internal fun provideMovieService(retrofit: Retrofit): MovieService {
+        return retrofit.create(MovieService::class.java)
+    }
 
 }

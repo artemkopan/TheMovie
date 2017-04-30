@@ -3,16 +3,22 @@
           package="com.artemkopan.movie"
     >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor"
         >
         <activity
-            android:name=".ui.discover.DiscoverActivity"
+            android:name=".ui.movie.MoviesActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>

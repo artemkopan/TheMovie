@@ -21,6 +21,10 @@ import timber.log.Timber
 
 private const val NO_OVERRIDE = -1
 
+fun ImageView.loadCancel(){
+    Glide.clear(this)
+}
+
 fun ImageView.loadImage(url: String?,
                         @Px width: Int = NO_OVERRIDE,
                         @Px height: Int = NO_OVERRIDE,

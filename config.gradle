@@ -5,8 +5,7 @@ ext {
     APP_NAME = "TheMovie"
     APPLICATION_ID = "com.artemkopan.movie"
 
-    BASE_URL = "http://fittest.in-staging.pub"
-    ENDPOINT = BASE_URL + "/api/v1/"
+    ENDPOINT = "https://api.themoviedb.org/3/"
 }
 
 ext {
