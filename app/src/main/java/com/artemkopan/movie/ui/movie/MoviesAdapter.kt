@@ -28,7 +28,7 @@ class MoviesAdapter @Inject constructor() : RecyclerBaseAdapter<Movie, MovieHold
     }
 
     override fun onBindViewHolder(holder: MovieHolder, model: Movie, position: Int) {
-//        holder.bind(context, model, position)
+        holder.bind(context, model, position)
     }
 
     class MoviesCallback(oldList: List<Movie>, newList: List<Movie>) : BaseDiffCallback<Movie>(oldList, newList) {

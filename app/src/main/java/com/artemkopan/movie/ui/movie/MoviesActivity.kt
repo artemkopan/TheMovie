@@ -22,4 +22,13 @@ class MoviesActivity : BaseInjectActivity<MoviesPresenter, MoviesView>(), Movies
     override fun injectPresenter(presenter: MoviesPresenter) {
         super.injectPresenter(presenter)
     }
+
+    override fun showProgress(tag: Any?) {
+        list.showProgress()
+    }
+
+    override fun hideProgress(tag: Any?) {
+        list.hideProgress()
+    }
+
 }

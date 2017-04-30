@@ -6,6 +6,7 @@ import android.widget.ImageView
 import com.artemkopan.movie.data.entity.Movie
 import com.artemkopan.movie.util.extensions.loadCancel
 import com.artemkopan.movie.util.extensions.loadImage
+import com.artemkopan.movie.util.glide.PosterImage
 import com.artemkopan.recycler.holder.BaseHolder
 
 /**
@@ -15,7 +16,7 @@ import com.artemkopan.recycler.holder.BaseHolder
 class MovieHolder(itemView: View) : BaseHolder<Movie>(itemView) {
 
     override fun bind(context: Context, item: Movie, position: Int) {
-        (itemView as ImageView).loadImage(item.posterPath)
+        (itemView as ImageView).loadImage(PosterImage(item.posterPath))
     }
 
     override fun clear() {

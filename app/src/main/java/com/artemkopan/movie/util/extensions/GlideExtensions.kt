@@ -18,22 +18,22 @@ import com.bumptech.glide.request.target.Target
 import timber.log.Timber
 
 
-
 private const val NO_OVERRIDE = -1
 
-fun ImageView.loadCancel(){
+fun ImageView.loadCancel() {
     Glide.clear(this)
 }
 
-fun ImageView.loadImage(url: String?,
-                        @Px width: Int = NO_OVERRIDE,
-                        @Px height: Int = NO_OVERRIDE,
-                        errorDrawable: GlidePlaceHolder = Drawable(),
-                        placeholderDrawable: GlidePlaceHolder = Drawable(),
-                        centerCrop: Boolean = true,
-                        animate: Boolean = false,
-                        requestListener: RequestListener<Any, GlideDrawable>? = if (BuildConfig.DEBUG) DebugRequestListener() else null,
-                        vararg transformations: Transformation<Bitmap>) {
+fun ImageView.loadImage(
+        url: Any,
+        @Px width: Int = NO_OVERRIDE,
+        @Px height: Int = NO_OVERRIDE,
+        errorDrawable: GlidePlaceHolder = Drawable(),
+        placeholderDrawable: GlidePlaceHolder = Drawable(),
+        centerCrop: Boolean = true,
+        animate: Boolean = false,
+        requestListener: RequestListener<Any, GlideDrawable>? = if (BuildConfig.DEBUG) DebugRequestListener() else null,
+        vararg transformations: Transformation<Bitmap>) {
 
     val request = Glide.with(context).load(url)
 

@@ -3,8 +3,13 @@ package com.artemkopan.movie
 import android.app.Application
 import android.content.Context
 import com.artemkopan.movie.injection.DaggerComponentProvider
+import com.artemkopan.movie.util.glide.ApiImageModel
+import com.artemkopan.movie.util.glide.PosterImageModelFactory
+import com.artemkopan.movie.util.glide.ApiImageUrlLoader
+import com.bumptech.glide.Glide
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
+import java.io.InputStream
 
 /**
  * Created by Artem Kopan for TheMovie
@@ -29,6 +34,8 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
             LeakCanary.install(this)
         }
+
+        Glide.get(this).register(ApiImageModel::class.java, InputStream::class.java, PosterImageModelFactory())
 
 //        FontUtils.addFont(Typeface.BOLD, "Roboto-Bold.ttf")
 //        FontUtils.addFont(Typeface.ITALIC, "Roboto-Italic.ttf")

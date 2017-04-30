@@ -23,8 +23,6 @@ import javax.inject.Inject
 
 @PresentationScope
 class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), OnRecyclerPaginationResult {
-    override fun onRecyclePaginationNextPage() {
-    }
 
     @Inject lateinit var model: MovieModel
     @Inject lateinit var destroy: CompositeDisposable
@@ -33,25 +31,24 @@ class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), O
 
     private val apiKey: String by lazy { context.getString(R.string.api_key) }
     private val paginationPopular: Pagination by lazy { Pagination() }
-    private var createPaginationListener: OnRecyclerPaginationListener? = null
-
+    private var paginationListener: OnRecyclerPaginationListener? = null
 
     fun setList(list: ExRecyclerView) {
         list.adapter = adapter
-        createPaginationListener = list.createPaginationListener(this)
-
+        paginationListener = list.createPaginationListener(this)
 
         if (adapter.isEmpty) {
+            paginationPopular.reset()
+            loadPopular()
         }
-
     }
-
 
     private fun loadPopular(page: Int = paginationPopular.page) {
         load(model.getPopular(apiKey, page)
                      .doOnSuccess {
                          paginationPopular.page = it.page ?: 1
                          paginationPopular.total = it.totalPages ?: 1
+                         if (paginationPopular.hasNext()) paginationListener?.enablePagination()
                      }
                      .map { it.results })
     }
@@ -68,8 +65,17 @@ class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), O
                     return@map diff
                 }
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { onShowProgress() }
+                .doFinally { onHideProgress() }
                 .subscribe(Consumer { it.dispatchUpdatesTo(adapter) },
                            ExceptionManager.consumerThrowable({ mvpView }))
                 .addTo(destroy)
     }
+
+    override fun onRecyclePaginationNextPage() {
+        if (paginationPopular.hasNext()) {
+            loadPopular(paginationPopular.next())
+        }
+    }
+
 }
