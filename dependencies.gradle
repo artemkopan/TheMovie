@@ -18,9 +18,11 @@ ext.versions = [
 
         kotlin            : '1.1.1',
         supportLibrary    : '25.3.1',
-        baseProject       : '2.0.3',
         constraintLayout  : '1.0.2',
         dagger            : '2.9',
+
+        //Base Project
+        baseProject       : '2.0.2',
 
         // Network
         retrofit          : '2.2.0',
@@ -30,6 +32,7 @@ ext.versions = [
         // Rx
         rxJava            : '2.0.8',
         rxAndroid         : '2.0.1',
+        rxKotlin          : '2.0.1-RC1',
         rxPermissions     : '0.9.3@aar',
 
         // Image
@@ -45,9 +48,13 @@ ext.versions = [
         // Debug
         timber            : '4.5.1',
         leakCanary        : '1.5',
+        stetho            : '1.4.2',
+        stetho_okhttp     : '1.4.2',
+        stetho_noop       : '1.1',
 
         // Blur
         blurry            : '2.1.1'
+
 ]
 
 ext.gradlePlugins = [
@@ -69,7 +76,7 @@ ext.libraries = [
         baseUtils         : "com.github.artemkopan:base-utils:$versions.baseProject",
         baseRecycler      : "com.github.artemkopan:base-recycler:$versions.baseProject",
         baseWidget        : "com.github.artemkopan:base-widget:$versions.baseProject",
-        baseAll        : "com.github.artemkopan:base-all:$versions.baseProject",
+        baseAll           : "com.github.artemkopan:base-all:$versions.baseProject",
 
         dagger            : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler    : "com.google.dagger:dagger-compiler:$versions.dagger",
@@ -81,12 +88,17 @@ ext.libraries = [
 
         timber            : "com.jakewharton.timber:timber:$versions.timber",
         okLog             : "com.github.simonpercic:oklog3:$versions.okLog",
+        stetho            : "com.facebook.stetho:stetho:$versions.stetho",
+        stetho_okhttp     : "com.facebook.stetho:stetho-okhttp3:$versions.stetho",
+        stetho_noop       : "net.igenius:stetho-no-op:$versions.stetho_noop",
+
 
         leakCanaryDebug   : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
         leakCanaryRelease : "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary",
 
         rxJava            : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
         rxAndroid         : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+        rxKotlin          : "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin",
         rxPermissions     : "com.tbruyelle.rxpermissions:rxpermissions:$versions.rxPermissions",
 
         glide             : "com.github.bumptech.glide:glide:$versions.glide",

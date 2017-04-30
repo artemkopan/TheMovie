@@ -18,15 +18,15 @@ android {
     buildTypes {
         all {
             generateName(applicationVariants)
+            buildConfigField 'String', 'BASE_URL', "\"$BASE_URL\""
+            buildConfigField 'String', 'ENDPOINT', "\"$ENDPOINT\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
+
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
@@ -38,11 +38,31 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    kapt libraries.daggerCompiler
 
     compile libraries.kotlin
+    compile libraries.rxKotlin
+
+    kapt libraries.daggerCompiler
+    compile libraries.dagger
 
     compile libraries.baseAll
 
+    compile libraries.constraintLayout
 
+    compile libraries.retrofit
+    compile libraries.converterGson
+    compile libraries.rxJavaAdapter
+    compile libraries.okHttpLogging
+    compile libraries.okLog
+
+    compile libraries.glide
+    compile libraries.timber
+
+    //Debug
+    debugCompile libraries.stetho
+    debugCompile libraries.stetho_okhttp
+    releaseCompile libraries.stetho_noop
+
+    debugCompile libraries.leakCanaryDebug
+    releaseCompile libraries.leakCanaryRelease
 }
