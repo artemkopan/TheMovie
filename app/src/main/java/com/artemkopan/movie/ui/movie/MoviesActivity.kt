@@ -31,4 +31,8 @@ class MoviesActivity : BaseInjectActivity<MoviesPresenter, MoviesView>(), Movies
         list.hideProgress()
     }
 
+    override fun showError(tag: Any?, error: String?) {
+        list.showText(error)
+    }
+
 }

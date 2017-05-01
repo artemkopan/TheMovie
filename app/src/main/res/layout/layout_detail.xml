@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress XmlUnusedNamespaceDeclaration -->
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_detail"
+    >
+
+    <com.artemkopan.widget.fonts.FontTextView
+        android:id="@+id/titleTxt"
+        style="@style/Detail.Text.Big"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:textStyle="@integer/font_style_medium"
+        tools:text="Kong: "
+        />
+
+    <com.artemkopan.widget.fonts.FontTextView
+        android:id="@+id/ratingTxt"
+        style="@style/Detail.Text.Medium"
+        android:layout_width="wrap_content"
+        android:paddingLeft="0dp"
+        android:textColor="?colorAccent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt"
+        app:textStyle="@integer/font_style_medium"
+        tools:ignore="RtlHardcoded,RtlSymmetry"
+        tools:text="@string/detail_imdb_rating"
+        />
+
+    <com.artemkopan.widget.fonts.FontTextView
+        android:id="@+id/genreTxt"
+        style="@style/Detail.Text.Medium"
+        android:layout_width="0dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textAllCaps="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ratingTxt"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt"
+        app:textStyle="@integer/font_style_medium"
+        tools:text="ACTION | ADVENTURE | FANTASY | TEST | TEST | TEST | TEST"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/trailerPager"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/detail_poster_height"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genreTxt"
+        />
+
+    <com.artemkopan.movie.ui.widget.ExpandableTextView
+        android:id="@+id/expandLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:animDuration="200"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trailerPager"
+        app:maxCollapsedLines="4"
+        tools:layout_height="200dp"
+        >
+
+        <com.artemkopan.widget.fonts.FontTextView
+            android:id="@id/expandable_text"
+            style="@style/Detail.Text.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="ASDOASKDOaskopdodsaopsad"
+            />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@id/expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:background="@android:color/transparent"
+            />
+    </com.artemkopan.movie.ui.widget.ExpandableTextView>
+
+</android.support.constraint.ConstraintLayout>

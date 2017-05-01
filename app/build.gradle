@@ -49,6 +49,8 @@ dependencies {
 
     compile libraries.constraintLayout
 
+    compile libraries.supportDesign
+
     compile libraries.retrofit
     compile libraries.converterGson
     compile libraries.rxJavaAdapter
@@ -57,6 +59,8 @@ dependencies {
 
     compile libraries.glide
     compile libraries.timber
+    compile libraries.blurry
+
 
     //Debug
     debugCompile libraries.stetho

@@ -16,13 +16,13 @@ ext.versions = [
         androidDevMetrics : '0.4',
         kotlinGradlePlugin: '1.1.2',
 
-        kotlin            : '1.1.1',
+        kotlin            : '1.1.2',
         supportLibrary    : '25.3.1',
         constraintLayout  : '1.0.2',
         dagger            : '2.9',
 
         //Base Project
-        baseProject       : '2.0.2',
+        baseProject       : '2.0.4',
 
         // Network
         retrofit          : '2.2.0',
@@ -44,6 +44,8 @@ ext.versions = [
         swipeLayout       : '1.2.0@aar',
         textdrawable      : '1.0.1',
         exoplayer         : 'r2.3.1',
+        expandableLayout  : '1.2',
+        expandableTextView: '0.14',
 
         // Debug
         timber            : '4.5.1',
@@ -106,6 +108,8 @@ ext.libraries = [
         swipeLayout       : "com.daimajia.swipelayout:library:$versions.swipeLayout",
         textdrawable      : "com.amulyakhare:com.amulyakhare.textdrawable:$versions.textdrawable",
         exoplayer         : "com.google.android.exoplayer:exoplayer:$versions.exoplayer",
+        expandableLayout  : "net.cachapa.expandablelayout:expandablelayout:$versions.expandableLayout",
+
 
         blurry            : "jp.wasabeef:blurry:$versions.blurry",
         asdp              : "com.github.adhishlal:asdp:$versions.asdp"

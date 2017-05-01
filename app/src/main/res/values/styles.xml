@@ -1,12 +1,39 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
 
     <style name="Toolbar">
+        <item name="android:id">@id/toolbar</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?actionBarSize</item>
         <item name="titleTextColor">@android:color/white</item>
         <item name="subtitleTextColor">@android:color/darker_gray</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="AppBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:transitionGroup" tools:targetApi="lollipop">true</item>
+    </style>
+
+    <style name="CircleProgress">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">@dimen/base_progress_size_small</item>
+        <item name="android:layout_height">@dimen/base_progress_size_small</item>
+        <item name="cpv_progressColor">@android:color/white</item>
+    </style>
+
+
+
+    <style name="Text">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Single">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
 </resources>

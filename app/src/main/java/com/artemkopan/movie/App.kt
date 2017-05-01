@@ -2,10 +2,11 @@ package com.artemkopan.movie
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Typeface
 import com.artemkopan.movie.injection.DaggerComponentProvider
 import com.artemkopan.movie.util.glide.ApiImageModel
-import com.artemkopan.movie.util.glide.PosterImageModelFactory
-import com.artemkopan.movie.util.glide.ApiImageUrlLoader
+import com.artemkopan.movie.util.glide.ApiImageModelFactory
+import com.artemkopan.widget.fonts.FontUtils
 import com.bumptech.glide.Glide
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
@@ -35,13 +36,13 @@ class App : Application() {
             LeakCanary.install(this)
         }
 
-        Glide.get(this).register(ApiImageModel::class.java, InputStream::class.java, PosterImageModelFactory())
+        Glide.get(this).register(ApiImageModel::class.java, InputStream::class.java, ApiImageModelFactory())
 
-//        FontUtils.addFont(Typeface.BOLD, "Roboto-Bold.ttf")
-//        FontUtils.addFont(Typeface.ITALIC, "Roboto-Italic.ttf")
-//        FontUtils.addFont(Typeface.NORMAL, "Roboto-Regular.ttf")
-//        FontUtils.addFont(FontUtils.MEDIUM, "Roboto-Medium.ttf")
-//        FontUtils.addFont(FontUtils.LIGHT, "Roboto-Light.ttf")
+        FontUtils.addFont(Typeface.BOLD, "OpenSans-Bold.ttf")
+        FontUtils.addFont(Typeface.ITALIC, "OpenSans-Italic.ttf")
+        FontUtils.addFont(Typeface.NORMAL, "OpenSans-Regular.ttf")
+        FontUtils.addFont(FontUtils.MEDIUM, "OpenSans-Semibold.ttf")
+        FontUtils.addFont(FontUtils.LIGHT, "OpenSans-Light.ttf")
     }
 
 }

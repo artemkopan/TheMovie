@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="transition_poster">transition_poster</string>
+    <string name="transition_app_bar">transition_app_bar</string>
+
+</resources>

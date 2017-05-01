@@ -12,8 +12,10 @@
     >
 
     <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/appBar"
+        style="@style/AppBar"
+        android:transitionName="@string/transition_app_bar"
+        tools:targetApi="lollipop"
         >
 
         <android.support.v7.widget.Toolbar

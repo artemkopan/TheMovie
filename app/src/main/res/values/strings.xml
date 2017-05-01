@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TheMovie</string>
+
+
+    <!--Detail Screen-->
+    <string name="detail_imdb_rating">IMDb %.2f</string>
+
 </resources>

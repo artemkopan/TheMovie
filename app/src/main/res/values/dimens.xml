@@ -3,4 +3,9 @@
 
     <dimen name="corner_radius">4dp</dimen>
 
+    <dimen name="detail_poster_height">220dp</dimen>
+    <dimen name="detail_poster_height_0.5">110dp</dimen>
+
+    <dimen name="base_margin">16dp</dimen>
+
 </resources>

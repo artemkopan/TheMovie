@@ -32,6 +32,7 @@ fun ImageView.loadImage(
         placeholderDrawable: GlidePlaceHolder = Drawable(),
         centerCrop: Boolean = true,
         animate: Boolean = false,
+        thumbnail: Float = 0f,
         requestListener: RequestListener<Any, GlideDrawable>? = if (BuildConfig.DEBUG) DebugRequestListener() else null,
         vararg transformations: Transformation<Bitmap>) {
 
@@ -58,6 +59,10 @@ fun ImageView.loadImage(
 
     if (!animate) {
         request.dontAnimate()
+    }
+
+    if (thumbnail > 0) {
+        request.thumbnail(thumbnail)
     }
 
     if (width != NO_OVERRIDE && height != NO_OVERRIDE) {

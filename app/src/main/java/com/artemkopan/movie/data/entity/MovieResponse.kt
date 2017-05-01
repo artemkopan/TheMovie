@@ -2,7 +2,7 @@ package com.artemkopan.movie.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class Result<out T>(
+data class MovieResponse<out T>(
 
         @field:SerializedName("results")
         val results: T? = null,

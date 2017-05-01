@@ -1,9 +1,12 @@
 package com.artemkopan.movie.ui.movie
 
 import android.content.Context
+import android.support.v4.view.ViewCompat
 import android.view.View
 import android.widget.ImageView
+import com.artemkopan.movie.R.drawable
 import com.artemkopan.movie.data.entity.Movie
+import com.artemkopan.movie.util.extensions.GlidePlaceHolder.Res
 import com.artemkopan.movie.util.extensions.loadCancel
 import com.artemkopan.movie.util.extensions.loadImage
 import com.artemkopan.movie.util.glide.PosterImage
@@ -16,7 +19,11 @@ import com.artemkopan.recycler.holder.BaseHolder
 class MovieHolder(itemView: View) : BaseHolder<Movie>(itemView) {
 
     override fun bind(context: Context, item: Movie, position: Int) {
-        (itemView as ImageView).loadImage(PosterImage(item.posterPath))
+        (itemView as ImageView).loadImage(PosterImage(item.posterPath),
+                                          thumbnail = 0.1f,
+                                          errorDrawable = Res(drawable.ic_error),
+                                          placeholderDrawable = Res(drawable.ic_placeholder))
+//        ViewCompat.setTransitionName(itemView, "poster" + position)
     }
 
     override fun clear() {

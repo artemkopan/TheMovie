@@ -8,7 +8,7 @@ package com.artemkopan.movie.util
 data class Pagination(var page: Int = DEFAULT_VAL, var total: Int = DEFAULT_VAL) : Iterator<Int> {
 
     companion object {
-        private const val DEFAULT_VAL = 1
+        const val DEFAULT_VAL = 1
     }
 
     override fun hasNext() = page <= total
