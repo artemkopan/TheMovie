@@ -9,6 +9,14 @@ apply from: '../dependencies.gradle'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    signingConfigs {
+        key {
+            keyAlias 'TheMovie'
+            keyPassword 'pQuWWxYf9Dmu'
+            storeFile file(rootProject.projectDir.absolutePath + '/tools/key.jks')
+            storePassword 'pQuWWxYf9Dmu'
+        }
+    }
     defaultConfig {
         applicationId APPLICATION_ID
         minSdkVersion 16
@@ -19,6 +27,7 @@ android {
     }
     buildTypes {
         all {
+            signingConfig signingConfigs.key
             generateName(applicationVariants)
             buildConfigField 'String', 'ENDPOINT', "\"$ENDPOINT\""
         }
