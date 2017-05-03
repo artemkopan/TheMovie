@@ -11,5 +11,6 @@
     </style>
 
     <style name="AppTheme.Movies"/>
+    <style name="AppTheme.Details"/>
 
 </resources>

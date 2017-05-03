@@ -18,4 +18,8 @@
         <item name="android:windowReenterTransition">@transition/movies_reenter</item>
     </style>
 
+    <style name="AppTheme.Details">
+    <item name="android:windowReturnTransition">@transition/detail_return</item>
+    </style>
+
 </resources>

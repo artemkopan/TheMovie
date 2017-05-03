@@ -4,13 +4,17 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Typeface
 import com.artemkopan.movie.injection.DaggerComponentProvider
-import com.artemkopan.movie.util.glide.ApiImageModel
-import com.artemkopan.movie.util.glide.ApiImageModelFactory
+import com.artemkopan.movie.util.glide.models.ApiImageModel
+import com.artemkopan.movie.util.glide.models.ApiImageModelFactory
 import com.artemkopan.widget.fonts.FontUtils
 import com.bumptech.glide.Glide
 import com.squareup.leakcanary.LeakCanary
+import io.realm.Realm
 import timber.log.Timber
 import java.io.InputStream
+import io.realm.RealmConfiguration
+
+
 
 /**
  * Created by Artem Kopan for TheMovie
@@ -37,6 +41,10 @@ class App : Application() {
         }
 
         Glide.get(this).register(ApiImageModel::class.java, InputStream::class.java, ApiImageModelFactory())
+
+        Realm.init(this)
+        val realmConfiguration = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
+        Realm.setDefaultConfiguration(realmConfiguration)
 
         FontUtils.addFont(Typeface.BOLD, "OpenSans-Bold.ttf")
         FontUtils.addFont(Typeface.ITALIC, "OpenSans-Italic.ttf")

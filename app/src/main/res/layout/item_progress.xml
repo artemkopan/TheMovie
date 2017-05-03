@@ -12,6 +12,7 @@
 
     <com.artemkopan.widget.common.CircularProgressView
         style="@style/CircleProgress"
+        app:cpv_progressColor="@color/colorAccent"
         />
 
 </FrameLayout>

@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">TheMovie</string>
 
-
     <!--Detail Screen-->
-    <string name="detail_imdb_rating">IMDb %.2f</string>
+    <string name="detail_imdb_rating">IMDb %s</string>
+    <string name="detail_tmdb_rating">TMDb %s</string>
+    <string name="detail_trailers_header">TRAILERS:</string>
+    <string name="detail_release_date">RELEASE DATE: %s</string>
+
+    <!--Menu Actions-->
+    <string name="action_most_popular">Most Popular</string>
+    <string name="action_top_rated">Top Rated</string>
+    <string name="action_favorite">Favorite</string>
 
 </resources>

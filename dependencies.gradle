@@ -19,10 +19,14 @@ ext.versions = [
         kotlin            : '1.1.2',
         supportLibrary    : '25.3.1',
         constraintLayout  : '1.0.2',
-        dagger            : '2.9',
+        dagger            : '2.11-rc1',
 
         //Base Project
         baseProject       : '2.0.4',
+
+        //DB
+        greenDao          : '3.2.2',
+        realm             : '3.1.3',
 
         // Network
         retrofit          : '2.2.0',
@@ -63,7 +67,9 @@ ext.gradlePlugins = [
         android          : "com.android.tools.build:gradle:$versions.android",
         androidApt       : "com.neenbedankt.gradle.plugins:android-apt:$versions.androidApt",
         androidDevMetrics: "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androidDevMetrics",
-        kotlin           : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinGradlePlugin"
+        kotlin           : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinGradlePlugin",
+        greenDao         : "org.greenrobot:greendao-gradle-plugin:$versions.greenDao",
+        realm            : "io.realm:realm-gradle-plugin:$versions.realm"
 ]
 
 ext.libraries = [
@@ -79,6 +85,9 @@ ext.libraries = [
         baseRecycler      : "com.github.artemkopan:base-recycler:$versions.baseProject",
         baseWidget        : "com.github.artemkopan:base-widget:$versions.baseProject",
         baseAll           : "com.github.artemkopan:base-all:$versions.baseProject",
+
+        greenDao          : "org.greenrobot:greendao:$versions.greenDao",
+
 
         dagger            : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler    : "com.google.dagger:dagger-compiler:$versions.dagger",

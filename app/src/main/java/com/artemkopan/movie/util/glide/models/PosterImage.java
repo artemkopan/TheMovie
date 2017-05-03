@@ -1,4 +1,8 @@
-package com.artemkopan.movie.util.glide;
+package com.artemkopan.movie.util.glide.models;
+
+import com.artemkopan.movie.Constants.Url;
+
+import java.util.Locale;
 
 /**
  * Created by Artem Kopan for TheMovie
@@ -13,6 +17,6 @@ public class PosterImage implements ApiImageModel {
 
     @Override
     public String requestUrl(int width, int height) {
-        return "https://image.tmdb.org/t/p/w500/" + path;
+        return String.format(Locale.US, Url.TMDB_IMG, path);
     }
 }

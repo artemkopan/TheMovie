@@ -11,6 +11,7 @@ import com.artemkopan.movie.util.extensions.GlidePlaceHolder.Drawable
 import com.artemkopan.movie.util.extensions.GlidePlaceHolder.Res
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.RequestListener
@@ -34,6 +35,7 @@ fun ImageView.loadImage(
         animate: Boolean = false,
         thumbnail: Float = 0f,
         requestListener: RequestListener<Any, GlideDrawable>? = if (BuildConfig.DEBUG) DebugRequestListener() else null,
+        diskStrategy: DiskCacheStrategy? = null,
         vararg transformations: Transformation<Bitmap>) {
 
     val request = Glide.with(context).load(url)
@@ -64,6 +66,8 @@ fun ImageView.loadImage(
     if (thumbnail > 0) {
         request.thumbnail(thumbnail)
     }
+
+    if (diskStrategy != null) request.diskCacheStrategy(diskStrategy)
 
     if (width != NO_OVERRIDE && height != NO_OVERRIDE) {
         request.override(width, height)

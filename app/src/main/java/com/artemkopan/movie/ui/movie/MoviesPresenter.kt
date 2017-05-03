@@ -1,12 +1,17 @@
 package com.artemkopan.movie.ui.movie
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.support.v4.util.Pair
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
 import android.view.View
 import com.artemkopan.movie.R
-import com.artemkopan.movie.data.entity.Movie
+import com.artemkopan.movie.data.database.DatabaseManager
+import com.artemkopan.movie.data.entity.MovieItem
+import com.artemkopan.movie.data.entity.MovieResponse
 import com.artemkopan.movie.data.exception.ExceptionManager
 import com.artemkopan.movie.data.model.movie.MovieModel
 import com.artemkopan.movie.injection.qualifer.ActivityContext
@@ -27,17 +32,25 @@ import kotlinx.android.synthetic.main.activity_movies.*
 import javax.inject.Inject
 
 @PresentationScope
-class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), OnRecyclerPaginationResult, OnItemClickListener<Movie> {
+class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), OnRecyclerPaginationResult, OnItemClickListener<MovieItem> {
 
     @Inject lateinit var model: MovieModel
     @Inject lateinit var destroy: CompositeDisposable
     @Inject lateinit var adapter: MoviesAdapter
+    @Inject lateinit var database: DatabaseManager
     @Inject @field:ActivityContext lateinit var activity: FragmentActivity
 
+    companion object {
+        internal const val NONE = -1
+        internal const val POPULAR = 1
+        internal const val TOP_RATED = 2
+        internal const val FAVORITE = 3
+    }
+
     private val apiKey by lazy { activity.getString(R.string.api_key) }
-    private val spanCount by lazy { activity.resources.getInteger(R.integer.movies_span_count) }
-    private val paginationPopular: Pagination by lazy { Pagination() }
+    private val pagination: Pagination by lazy { Pagination() }
     private var paginationListener: OnRecyclerPaginationListener? = null
+    private var type = NONE
 
     override fun attachView(view: MoviesView?) {
         super.attachView(view)
@@ -53,28 +66,46 @@ class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), O
                 it.spanSizeLookup = object : SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         // show progress with fill width
-                        if (position == adapter.listSize) return spanCount
+                        if (position == adapter.listSize) return it.spanCount
                         // else return default span size
                         return 1
                     }
                 }
             }
         }
+    }
 
-        if (adapter.isEmpty) {
-            paginationPopular.reset()
-            loadPopular()
+    fun setType(type: Int) {
+        if (this.type == type) return
+        this.type = type
+        adapter.list.beginBatchedUpdates()
+        adapter.list.clear()
+        pagination.reset()
+        when (type) {
+            POPULAR -> {
+                loadPopular(); mvpView?.updateTitle(R.string.action_most_popular)
+            }
+            TOP_RATED -> {
+                loadTopRated(); mvpView?.updateTitle(R.string.action_top_rated)
+            }
+            FAVORITE -> {
+                loadFavorite(); mvpView?.updateTitle(R.string.action_favorite)
+            }
         }
+        adapter.list.endBatchedUpdates()
     }
 
     override fun onRecyclePaginationNextPage() {
         paginationListener?.disablePagination()
-        if (paginationPopular.hasNext()) {
-            loadPopular(paginationPopular.next())
+        if (pagination.hasNext()) {
+            when (type) {
+                POPULAR -> loadPopular(pagination.next())
+                TOP_RATED -> loadTopRated(pagination.next())
+            }
         }
     }
 
-    override fun onItemClickListener(view: View, p1: Int, item: Movie?, vararg shared: View?) {
+    override fun onItemClickListener(view: View, p1: Int, item: MovieItem?, vararg shared: View?) {
         if (view.id == R.id.posterImg && item != null) {
             val toolbar = Pair<View, String>(activity.appBar, activity.getString(R.string.transition_app_bar))
             val poster = Pair<View, String>(shared[0], activity.getString(R.string.transition_app_bar))
@@ -82,24 +113,51 @@ class MoviesPresenter @Inject constructor() : BasePresenterImpl<MoviesView>(), O
         }
     }
 
-    private fun loadPopular(page: Int = paginationPopular.page) {
-        load(model.getPopular(apiKey, page)
-                     .doOnSuccess {
-                         paginationPopular.page = it.page ?: Pagination.DEFAULT_VAL
-                         paginationPopular.total = it.totalPages ?: Pagination.DEFAULT_VAL
-                         if (paginationPopular.hasNext()) paginationListener?.enablePagination()
-                     }
-                     .doOnError { paginationListener?.enablePagination() }
+    private fun loadFavorite() {
+        paginationListener?.disablePagination()
+        database.findItems(MovieItem::class.java, {})
+                .subscribe(Consumer { adapter.list.addAll(it); mvpView?.showEmptyList(adapter.isEmpty) },
+                           ExceptionManager.consumerThrowable({ mvpView }))
+    }
+
+    private fun loadTopRated(page: Int = pagination.page) {
+        load(model.getTopRated(apiKey, page)
+                     .doOnSuccess(updatePagination())
                      .map { it.results })
     }
 
-    private fun load(observer: Single<List<Movie>>) {
+    private fun loadPopular(page: Int = pagination.page) {
+        load(model.getPopular(apiKey, page)
+                     .doOnSuccess(updatePagination())
+                     .map { it.results })
+    }
+
+    private fun load(observer: Single<List<MovieItem>>) {
         observer
+                .doOnError { paginationListener?.enablePagination() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { if (adapter.isEmpty) onShowProgress() else adapter.showFooter(true) }
                 .doFinally { onHideProgress(); adapter.showFooter(false); }
-                .subscribe(Consumer { adapter.list.addAll(it) }, ExceptionManager.consumerThrowable({ mvpView }))
+                .subscribe(Consumer { adapter.list.addAll(it); mvpView?.showEmptyList(adapter.isEmpty) },
+                           ExceptionManager.consumerThrowable({ mvpView }))
                 .addTo(destroy)
+    }
+
+    private fun updatePagination(): Consumer<in MovieResponse<List<MovieItem>>>? {
+        return Consumer {
+            pagination.page = it.page ?: Pagination.DEFAULT_VAL
+            pagination.total = it.totalPages ?: Pagination.DEFAULT_VAL
+            if (pagination.hasNext()) paginationListener?.enablePagination()
+        }
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == DetailActivity.REQ && resultCode == Activity.RESULT_OK && type == FAVORITE) {
+            if (data?.getBooleanExtra(DetailActivity.KEY_UPDATE_FAVORITES, false) ?: false) {
+                adapter.clear()
+                loadFavorite()
+            }
+        }
     }
 
 

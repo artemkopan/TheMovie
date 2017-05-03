@@ -1,4 +1,4 @@
-package com.artemkopan.movie.util.glide;
+package com.artemkopan.movie.util.glide.models;
 
 /**
  * Created by Artem Kopan for TheMovie

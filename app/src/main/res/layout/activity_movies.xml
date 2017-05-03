@@ -27,6 +27,8 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:erv_progressColor="@color/colorAccent"
+        app:erv_textColor="@android:color/white"
         app:layoutManager="GridLayoutManager"
         app:spanCount="@integer/movies_span_count"
         />

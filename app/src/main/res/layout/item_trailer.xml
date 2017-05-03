@@ -9,10 +9,34 @@
     android:orientation="vertical"
     >
 
-    <WebView
-        android:id="@+id/webView"
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        />
+
+    <com.artemkopan.widget.fonts.FontTextView
+        android:id="@+id/titleTxt"
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_trailer_item"
+        android:ellipsize="end"
+        android:gravity="bottom"
+        android:maxLines="3"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        tools:text="Video Title"
+        />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_youtube_logo"
         />
 
 </FrameLayout>
